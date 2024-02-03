@@ -13,15 +13,24 @@
 
 Syllabus
 
+<<<<<<< HEAD
 * [Module 1: Containerization and Infrastructure as Code](#module-1-containerization-and-infrastructure-as-code)
 * [Module 2: Workflow Orchestration](#module-2-workflow-orchestration)
 * [Workshop 1: Data Ingestion](#workshop-1-data-ingestion)
+=======
+* [Module 1: Introduction & Prerequisites](#module-1-introduction--prerequisites)
+* [Module 2: Workflow Orchestration](#module-2-workflow-orchestration)
+>>>>>>> ac844c4 (Initial commit)
 * [Module 3: Data Warehouse](#module-3-data-warehouse)
 * [Module 4: Analytics Engineering](#module-4-analytics-engineering)
 * [Module 5: Batch processing](#module-5-batch-processing)
 * [Module 6: Streaming](#module-6-streaming)
+<<<<<<< HEAD
 * [Workshop 2: Stream Processing with SQL](#workshop-2-stream-processing-with-sql)
 * [Project](#project)
+=======
+* [Module 7: Project](#module-7-project)
+>>>>>>> ac844c4 (Initial commit)
 
 ## Taking the course
 
@@ -29,8 +38,12 @@ Syllabus
 
 * **Start**: 15 January 2024 (Monday) at 17:00 CET
 * **Registration link**: https://airtable.com/shr6oVXeQvSI5HuWD
+<<<<<<< HEAD
 * [Cohort folder](cohorts/2024/) with homeworks and deadlines
 * [Launch stream with course overview](https://www.youtube.com/live/AtRhA-NfS24?si=5JzA_E8BmJjiLi8l)
+=======
+* [Cohort folder](cohorts/2024/) with homeworks and deadlines 
+>>>>>>> ac844c4 (Initial commit)
 
 
 ### Self-paced mode
@@ -46,11 +59,18 @@ can take the course at your own pace
 
 ## Syllabus
 
+<<<<<<< HEAD
 > **Note:** NYC TLC changed the format of the data we use to parquet.
 > In the course we still use the CSV files accessible [here](https://github.com/DataTalksClub/nyc-tlc-data).
 
 
 ### [Module 1: Containerization and Infrastructure as Code](01-docker-terraform/)
+=======
+> **Note:** NYC TLC changed the format of the data we use to parquet. But you can still access
+> the csv files [here](https://github.com/DataTalksClub/nyc-tlc-data).
+
+### [Module 1: Introduction & Prerequisites](week_1_basics_n_setup)
+>>>>>>> ac844c4 (Initial commit)
 
 * Course overview
 * Introduction to GCP
@@ -60,16 +80,24 @@ can take the course at your own pace
 * Preparing the environment for the course
 * Homework
 
+<<<<<<< HEAD
 [More details](01-docker-terraform/)
 
 
 ### [Module 2: Workflow Orchestration](02-workflow-orchestration/)
+=======
+[More details](week_1_basics_n_setup)
+
+
+### [Module 2: Workflow Orchestration](week_2_workflow_orchestration/)
+>>>>>>> ac844c4 (Initial commit)
 
 * Data Lake
 * Workflow orchestration
 * Workflow orchestration with Mage
 * Homework
 
+<<<<<<< HEAD
 [More details](02-workflow-orchestration/)
 
 
@@ -86,18 +114,35 @@ can take the course at your own pace
 
 
 ### [Module 3: Data Warehouse](03-data-warehouse/)
+=======
+[More details](week_2_workflow_orchestration/)
+
+
+### [Module 3: Data Warehouse](week_3_data_warehouse)
+
+>>>>>>> ac844c4 (Initial commit)
 
 * Data Warehouse
 * BigQuery
 * Partitioning and clustering
 * BigQuery best practices
 * Internals of BigQuery
+<<<<<<< HEAD
 * BigQuery Machine Learning
 
 [More details](03-data-warehouse/)
 
 
 ### [Module 4: Analytics engineering](04-analytics-engineering/)
+=======
+* Integrating BigQuery with Airflow
+* BigQuery Machine Learning
+
+[More details](week_3_data_warehouse)
+
+
+### [Module 4: Analytics engineering](week_4_analytics_engineering/)
+>>>>>>> ac844c4 (Initial commit)
 
 * Basics of analytics engineering
 * dbt (data build tool)
@@ -109,10 +154,17 @@ can take the course at your own pace
 * Visualizing the data with google data studio and metabase
 
 
+<<<<<<< HEAD
 [More details](04-analytics-engineering/)
 
 
 ### [Module 5: Batch processing](05-batch/)
+=======
+[More details](week_4_analytics_engineering)
+
+
+### [Module 5: Batch processing](week_5_batch_processing)
+>>>>>>> ac844c4 (Initial commit)
 
 * Batch processing
 * What is Spark
@@ -120,15 +172,22 @@ can take the course at your own pace
 * Spark SQL
 * Internals: GroupBy and joins
 
+<<<<<<< HEAD
 [More details](05-batch/)
 
 ### [Module 6: Streaming](06-streaming/)
+=======
+[More details](week_5_batch_processing)
+
+### [Module 6: Streaming](week_6_stream_processing)
+>>>>>>> ac844c4 (Initial commit)
 
 * Introduction to Kafka
 * Schemas (avro)
 * Kafka Streams
 * Kafka Connect and KSQL
 
+<<<<<<< HEAD
 [More details](06-streaming/)
 
 
@@ -150,6 +209,54 @@ Putting everything we learned to practice
 ## Overview
 
 <img src="images/architecture/arch_v3_workshops.jpg" />
+=======
+[More details](week_6_stream_processing)
+
+
+### [Module 7: Project](week_7_project)
+
+Putting everything we learned to practice
+
+* Week 7 and 8: working on your project
+* Week 9: reviewing your peers
+
+[More details](week_7_project)
+
+### Course UI
+
+Alternatively, you can access this course using the provided UI app, the app provides a user-friendly interface for navigating through the course material. 
+
+* Visit the following link: [DE Zoomcamp UI](https://dezoomcamp.streamlit.app/)
+
+![dezoomcamp-ui](https://github.com/DataTalksClub/data-engineering-zoomcamp/assets/66017329/4466d2bc-3728-4fca-8e9e-b1c6be30a430)
+
+### Asking for help in Slack
+
+The best way to get support is to use [DataTalks.Club's Slack](https://datatalks.club/slack.html). Join the [`#course-data-engineering`](https://app.slack.com/client/T01ATQK62F8/C01FABYF2RG) channel.
+
+To make discussions in Slack more organized:
+
+* Follow [these recommendations](asking-questions.md) when asking for help
+* Read the [DataTalks.Club community guidelines](https://datatalks.club/slack/guidelines.html)
+
+## Overview
+
+### Architecture diagram
+<img src="images/architecture/arch_2.png"/>
+
+### Technologies
+* *Google Cloud Platform (GCP)*: Cloud-based auto-scaling platform by Google
+  * *Google Cloud Storage (GCS)*: Data Lake
+  * *BigQuery*: Data Warehouse
+* *Terraform*: Infrastructure-as-Code (IaC)
+* *Docker*: Containerization
+* *SQL*: Data Analysis & Exploration
+* *Mage*: Workflow Orchestration
+* *dbt*: Data Transformation
+* *Spark*: Distributed Processing
+* *Kafka*: Streaming
+
+>>>>>>> ac844c4 (Initial commit)
 
 ### Prerequisites
 
@@ -166,6 +273,7 @@ Prior experience with data engineering is not required.
 - [Ankush Khanna](https://linkedin.com/in/ankushkhanna2)
 - [Victoria Perez Mola](https://www.linkedin.com/in/victoriaperezmola/)
 - [Alexey Grigorev](https://linkedin.com/in/agrigorev)
+<<<<<<< HEAD
 - [Matt Palmer](https://www.linkedin.com/in/matt-palmer/)
 - [Luis Oliveira](https://www.linkedin.com/in/lgsoliveira/)
 - [Michael Shoemaker](https://www.linkedin.com/in/michaelshoemaker1/)
@@ -192,6 +300,20 @@ To make discussions in Slack more organized:
 
 * Follow [these recommendations](asking-questions.md) when asking for help
 * Read the [DataTalks.Club community guidelines](https://datatalks.club/slack/guidelines.html)
+=======
+
+## Tools
+
+For this course, you'll need to have the following software installed on your computer:
+
+* Docker and Docker-Compose
+* Python 3 (e.g. via [Anaconda](https://www.anaconda.com/products/individual))
+* Google Cloud SDK
+* Terraform
+
+See [Module 1](week_1_basics_n_setup) for more details about installing these tools
+
+>>>>>>> ac844c4 (Initial commit)
 
 
 
@@ -201,11 +323,16 @@ Thanks to the course sponsors for making it possible to run this course
 
 <p align="center">
   <a href="https://mage.ai/">
+<<<<<<< HEAD
     <img height="120" src="images/mage.svg">
+=======
+    <img height="130" src="images/mage.svg">
+>>>>>>> ac844c4 (Initial commit)
   </a>
 </p>
 
 
+<<<<<<< HEAD
 <p align="center">
   <a href="https://dlthub.com/">
     <img height="90" src="images/dlthub.png">
@@ -223,3 +350,7 @@ Do you want to support our course and our community? Please reach out to [alexey
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=DataTalksClub/data-engineering-zoomcamp&type=Date)](https://star-history.com/#DataTalksClub/data-engineering-zoomcamp&Date)
+=======
+Do you want to support our course and our community? Please reach out to [alexey@datatalks.club](alexey@datatalks.club)
+
+>>>>>>> ac844c4 (Initial commit)
