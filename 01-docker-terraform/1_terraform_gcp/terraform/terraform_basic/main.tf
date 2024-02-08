@@ -9,15 +9,15 @@ terraform {
 
 provider "google" {
 # Credentials only needs to be set if you do not have the GOOGLE_APPLICATION_CREDENTIALS set
-#  credentials = 
-  project = "<Your Project ID>"
+  credentials = "../keys/my-creds.json"
+  project = "delivery-carrier-40882"
   region  = "us-central1"
 }
 
 
 
 resource "google_storage_bucket" "data-lake-bucket" {
-  name          = "<Your Unique Bucket Name>"
+  name          = "terraform-20240207-bucket"
   location      = "US"
 
   # Optional, but recommended settings:
@@ -39,10 +39,10 @@ resource "google_storage_bucket" "data-lake-bucket" {
 
   force_destroy = true
 }
-
+// create table, delete table - check parameters
 
 resource "google_bigquery_dataset" "dataset" {
-  dataset_id = "<The Dataset Name You Want to Use>"
-  project    = "<Your Project ID>"
+  dataset_id = "demo-dataset"
+  project    = "demo-project"
   location   = "US"
 }
