@@ -1,19 +1,15 @@
 ## Data Engineering Zoomcamp 2024 Cohort
 
-<<<<<<< HEAD
 * [Pre-launch Q&A stream](https://www.youtube.com/watch?v=91b8u9GmqB4)
 * [Launch stream with course overview](https://www.youtube.com/live/AtRhA-NfS24?si=5JzA_E8BmJjiLi8l)
-=======
 * Pre-launch Q&A stream ([sign up here](https://lu.ma/1u1jlz4x)) 
 * Launch stream with course overview (TODO)
->>>>>>> ac844c4 (Initial commit)
 * [Deadline calendar](https://docs.google.com/spreadsheets/d/e/2PACX-1vQACMLuutV5rvXg5qICuJGL-yZqIV0FBD84CxPdC5eZHf8TfzB-CJT_3Mo7U7oGVTXmSihPgQxuuoku/pubhtml)
 * [Course Google calendar](https://calendar.google.com/calendar/?cid=ZXIxcjA1M3ZlYjJpcXU0dTFmaG02MzVxMG9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)
 * [FAQ](https://docs.google.com/document/d/19bnYs80DwuUimHM65UV3sylsCn2j1vziPOwzBwQrebw/edit?usp=sharing)
 * Course Playlist: Only 2024 Live videos & homeworks (TODO)
 
 
-<<<<<<< HEAD
 [**Module 1: Introduction & Prerequisites**](01-docker-terraform/)
 
 * [Homework](01-docker-terraform/homework.md)
@@ -88,6 +84,5 @@ Workshop with dlt (TBA)
 
 
 [**Module 7, 8 & 9: Project**](project.md)
->>>>>>> ac844c4 (Initial commit)
 
 More information [here](project.md)

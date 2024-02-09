@@ -58,11 +58,9 @@ Project feedback: TBA ("project-02" sheet)
 
 ### Evaluation criteria
 
-<<<<<<< HEAD
 See [here](../../projects/README.md)
 =======
 See [here](../../week_7_project/README.md)
->>>>>>> ac844c4 (Initial commit)
 
 
 ### Misc
