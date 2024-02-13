@@ -557,7 +557,6 @@ _[Back to the top](#table-of-contents)_
 
 # GCP's Transfer Service
 
-_[Video source](https://www.youtube.com/watch?v=rFOFTfD1uGk&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=22)_
 
 [Transfer Service](https://cloud.google.com/storage-transfer-service) is a GCP service to transfer data from multiple sources to Google's Cloud Storage. This is useful for Data Lake purposes.
 
@@ -593,9 +592,6 @@ We will use the _Transfer Service | cloud_ submenu. Creating a job takes 4 steps
 
 Once you click on the _Create_ button, the job will start transfering data right away. You may click on it to check the progress.
 
-![transfer source](images/02_19.png)
-![transfer source](images/02_20.png)
-
 You may now check your Storage dashboard; you should see a new bucket has been created there which contains all the data from the Amazon S3 bucket.
 
 Be aware that Transfer Service charges you per transferred gigabyte. For single use jobs, the Transfer Service UI is preferred to DAGs which take time to create and debug, but costs can add quickly if you're relying on this service to download data periodically.
@@ -622,3 +618,40 @@ Copy the `transfer_service.tf` to your Terraform work folder and run `terraform 
 If you agree with the changes, run `terraform apply` to start the Transfer Service job. You should now be able to see the job in the web UI.
 
 _[Back to the top](#table-of-contents)_
+
+## Config mage and GCP
+
+After initiating the data bucket and service group in GCP and Big Query account, we create another block in `DATA EXPORTER`. We want to partition the parquet by datetime and save it in GCP; therefore, we use `pyarrow` to do the partition. 
+```python
+import pyarrow as pa
+import pyarrow.parquet as pq
+import os
+
+if 'data_exporter' not in globals():
+  from mage_ai.data_preparation.decorators import data_exporter
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './downloaded-gcp-credentials-verdant-current.json'
+
+bucket_name = 'mage-zoomcamp-sherrytp'
+project_id = 'verdant-current'
+
+table_name = 'nyc_taxi_data'
+
+root_path = f'{bucket_name}/{table_name}'
+
+@data_exporter
+def export_data(data, *args, **kwargs):
+  # transform all datetime columns into timestamp format and take date
+  data['tpep_pickup_date'] = data['tpep_pickup_datetime'].dt.date
+  
+  table = pa.Table.from_pandas(data)
+
+  gcs = pa.fs.GcsFileSystem()
+
+  pq.write_to_dataset(
+    table, 
+    root_path=root_path, 
+    partition_cols=['tpep_pickup_date'], 
+    filesystem=gcs
+  )
+```
