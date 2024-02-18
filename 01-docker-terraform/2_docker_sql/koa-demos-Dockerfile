@@ -1,0 +1,11 @@
+# this image inheritanced from the official node image, with a quote of version
+FROM node:8.4
+# copy all files except .dockignore directories to the current image /app
+COPY . /app
+# specify the following working directory to be /app
+WORKDIR /app
+# RUN can run multiple commands to set up the image
+RUN ["npm", "install"]
+# expose means we can connect the port externally
+EXPOSE 3000/tcp
+# CMD is executed after the container runs
