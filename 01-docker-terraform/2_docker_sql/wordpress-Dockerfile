@@ -1,0 +1,27 @@
+version: "3"
+services:
+  db:
+    image: mysql:5.7
+    container_name: wordpress_db
+    restart: always
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: linux101-test
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_HOST: "%"
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: linux101-test

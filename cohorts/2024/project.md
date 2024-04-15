@@ -35,6 +35,7 @@ so in total, you will make three submissions.
 
 ### Evaluation criteria
 
-See [here](../../week_7_project/README.md)
+See [here](../../projects/README.md)
+
 
 
