@@ -283,37 +283,63 @@ python3 spark_local_spark_cluster.py
 * Create a cluster in Google cloud
 * Dataproc is a service from Google cloud
 * Go to Goole cloud console and sear for "Dataproc"
-* When you run it for the first time, you have to enable the API
-* Then click on "CREAT CLUSTER"
-	* Give it a name
-	* Choose a region (same as the bucket has)
+* When you run it for the first time, make sure the DataProc API is enabled in your account
+* Then click on "CREATE CLUSTER"
+	* Cluster Name: `owl-analysis-bucket`
+	* Choose a region (same as the bucket has): us-west1	
 	* Choose a cluster type. Ususally you would choose "standard": 1 master, multiple workers, for our case single node is enough
 	* Choose optional components: "Jupyter-Notebook", "Docker"
-	* "CREATE" the cluster
-	* This creates a new VM
+	* "CREATE" the cluster, creating a new VM
 	* Go to the cluster and click on it, there you find a buttom "SUBMIT JOB"
 	* Click on it, choose "Job type": PySpark
-	* Next, the main python file has to be selected, for that our scrit needs to be uploaded. We can use the already created bucket for that.
-	* Create a new folder called "code" and upload the file there (in practice you would have a separate bucket for the code)
-	* In the terminal go to the folder where the script is stored and copy it to the bucket ```gsutil cp <filename> gs://<bucket-name>/<location>/<filename>``` (```gsutil cp spark_local_spark_cluster.py gs://de-spark-frauke/code/spark_local_spark_cluster.py```)
-	* Then choose as "Main python script": gs://<bucket-name>/<location>/<filename>
-	* We have to specify Arguments: 
-* Creating a cluster
-	```--input_green=gs://<bucket-name>/pq/green/2020/*```
-	```--input_yellow=gs://<bucket-name>/pq/yellow/2020/*```
-	```--output=gs://<bucket-name>/report-2020```
-	* Click "SUBMIT"
-* We now used the web ui to submit a job
-	* we can also use the Google Cloud SDK or the REST API
-* See documentation: https://cloud.google.com/dataproc/docs/guides/submit-job#dataproc-submit-job-gcloud 
-```
-gcloud dataproc jobs submit pyspark \
+	* Next, the main python file has to be selected, for that our script needs to be uploaded. We can use the already created bucket for that, so don't configure the spark job as we did locally. 
+	* In the terminal go to the folder where the script is stored and copy the pyspark job script to the bucket:  
+	```gsutil cp <filename> gs://<bucket-name>/<location>/<filename>``` 
+	
+		(```gsutil cp spark_local_spark_cluster.py gs://de-spark-frauke/code/spark_local_spark_cluster.py```)
+
+	* Then choose as "Main python script": 
+	```
+	gs://<bucket-name>/<location>/<filename>
+	```
+	* We have to specify `Arguments` using the data bucket instead of `data`, and just copy as separate lines: 
+	```bash
+	--input_green=gs://<bucket-name>/pq/green/2020/*
+	--input_yellow=gs://<bucket-name>/<parquet-data-folder>/*
+	--output=gs://<bucket-name>/report-2020
+	```
+	* Click "SUBMIT" job
+
+	* we can also use the Google Cloud SDK or the REST API from documentation: https://cloud.google.com/dataproc/docs/guides/submit-job#dataproc-submit-job-gcloud
+	* Add `Dataproc Adminitrator` to the service account for running permission before running this: 
+	```
+	gcloud dataproc jobs submit pyspark \
 	--cluster=<custername> \
 	--region=<region> \
+    --jars=gs://spark-lib/bigqueryspark-bigquery-latest_2.12.jar \ 
 	gs://<bucket-name>/<location>/<filename> \
 	-- \
-	--input_green=gs://<bucket-name>/pq/green/2020/* \
-        --input_yellow=gs://<bucket-name>/pq/yellow/2020/* \
-        --output=gs://<bucket-name>/report-2020
-```
-* Add to the service account the role "Dataproc Administrator" before running this
+	--input_=gs://<bucket-name>/pq/green/2020/* \
+    --input_yellow=gs://<bucket-name>/pq/yellow/2020/* \
+    --output=gs://<bucket-name>/report
+	```
+    * The file name here can use `06_spark_sql.py` for submitting to GCP or `06_spark_big_query.py` for submitting to BigQuery, but change `output_report` accordingly. 
+
+## Read Spark Locally As DataFrames
+
+* Read csv file:
+	```
+	df = spark.read\
+		.option("header", "true") \
+		.parquet('fhvhv_tripdata_2021-01.csv')
+	```
+	* Spark doesn't try to infer types, but reads everything as strings
+	* Save the first 100 rows: ```head -n 101 fhvhv_tripdata_2021-01.csv > head.csv``` and read this file with pandas to check the types. Here also the timetamps are read as integers, the rest id ok
+	* use ```spark.createDataFrame(df_pandas).show()``` to convert a pandas dataframe to a spark dataframe, then types are not all strings any more
+	* Use the output of ```spark.createDataFrame(df_pandas).schema``` to define the types
+	* use this schema to read the data in spark
+* Now save data to parquet
+* We now have one big file, this is not good in spark, so we will break it into multiple files - which are called **partitions** in spark
+* ```df.repartition(24)```: This is a lazy command, it is only applied, when we actually do something
+* ```df.write.parquet('fhvhv/2021/01')``` (this takes a while)  
+* Read the created parquet files: ```spark.read.parquet("fhvhv/2021/01")```
